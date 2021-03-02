@@ -29,8 +29,8 @@ import { KeycloakAuthenticationService } from './auth-keycloak.service';
 @Injectable({ providedIn: 'root' })
 export class UsersService {
 
-  private rootUrl: string = '/api';
-  
+  private rootUrl: string = '/mock-server/microcks/api';
+
   private microcksAppClientId: string;
 
   constructor(private http: HttpClient, protected authService: IAuthenticationService) {
@@ -72,13 +72,13 @@ export class UsersService {
   getMicrocksAppClientId(): string {
     return this.microcksAppClientId;
   }
-  
+
   filterUsers(filter: string): Observable<User[]> {
     const options = { params: new HttpParams().set('search', filter) };
     return this.http.get<User[]>(this.rootUrl + '/users', options);
   }
 
-  countUsers(): Observable<any> { 
+  countUsers(): Observable<any> {
     return this.http.get<User[]>(this.rootUrl + '/users/count');
   }
 
@@ -86,10 +86,10 @@ export class UsersService {
     return this.http.get<any[]>(this.rootUrl + '/users/' + userId + '/role-mappings/clients/' + this.microcksAppClientId);
   }
 
-  assignRoleToUser(userId: string, role: string): Observable<any> { 
+  assignRoleToUser(userId: string, role: string): Observable<any> {
     return this.getRoleByName(role).pipe(
       switchMap((role: any) => {
-        return this.http.post<any[]>(this.rootUrl + '/users/' + userId + '/role-mappings/clients/' + this.microcksAppClientId, [ role ]); 
+        return this.http.post<any[]>(this.rootUrl + '/users/' + userId + '/role-mappings/clients/' + this.microcksAppClientId, [role]);
       })
     );
   }
@@ -97,8 +97,8 @@ export class UsersService {
   removeRoleFromUser(userId: string, role: string): Observable<any> {
     return this.getRoleByName(role).pipe(
       switchMap((role: any) => {
-        return this.http.request<any[]>('delete', 
-          this.rootUrl + '/users/' + userId + '/role-mappings/clients/' + this.microcksAppClientId, { body: [ role ] });
+        return this.http.request<any[]>('delete',
+          this.rootUrl + '/users/' + userId + '/role-mappings/clients/' + this.microcksAppClientId, { body: [role] });
       })
     );
   }

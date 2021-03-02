@@ -32,10 +32,10 @@ export class ArtifactUploaderDialogComponent implements OnInit {
   title: string;
   closeBtnName: string;
 
-  uploader: FileUploader = new FileUploader({url: '/api/artifact/upload', itemAlias: 'file'});
-  
-  constructor(public bsModalRef: BsModalRef, private notificationService: NotificationService) {}
- 
+  uploader: FileUploader = new FileUploader({ url: '/mock-server/microcks/api/artifact/upload', itemAlias: 'file' });
+
+  constructor(public bsModalRef: BsModalRef, private notificationService: NotificationService) { }
+
   ngOnInit() {
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
       this.notificationService.message(NotificationType.DANGER,

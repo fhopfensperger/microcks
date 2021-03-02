@@ -57,7 +57,7 @@ export class HubService {
   public importAPIVersionContractContent(contractUrl: string): Observable<any> {
     this.ensureRootUrl();
     const options = { params: new HttpParams().set('url', contractUrl) };
-    return this.http.post<any>('/api/artifact/download', null, options);
+    return this.http.post<any>('/mock-server/microcks/api/artifact/download', null, options);
   }
 
   private ensureRootUrl(): void {

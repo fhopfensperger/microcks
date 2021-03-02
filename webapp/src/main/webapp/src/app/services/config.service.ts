@@ -35,7 +35,7 @@ export class ConfigService {
 
   private config: any;
 
-  
+
   constructor(private http: HttpClient) {
     let w: any = window;
     if (w["MicrocksConfig"]) {
@@ -86,9 +86,9 @@ export class ConfigService {
     return <any>this.config.user;
   }
 
-  public loadConfiguredFeatures() : Promise<any>  {
+  public loadConfiguredFeatures(): Promise<any> {
     console.info("[ConfigService] Completing config with additional features...");
-    const featurePromise = this.http.get<any>('/api/features/config')
+    const featurePromise = this.http.get<any>('/mock-server/microcks/api/features/config')
       .toPromise().then(results => {
         this.config.features = results;
         console.info("[ConfigService] Got config: " + JSON.stringify(this.config.features));

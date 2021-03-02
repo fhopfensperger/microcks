@@ -26,7 +26,7 @@ import { ImportJob } from '../models/importer.model';
 @Injectable({ providedIn: 'root' })
 export class ImportersService {
 
-  private rootUrl: string = '/api';
+  private rootUrl: string = '/mock-server/microcks/api';
 
   constructor(private http: HttpClient) { }
 
@@ -40,7 +40,7 @@ export class ImportersService {
     return this.http.get<ImportJob[]>(this.rootUrl + '/jobs', options);
   }
 
-  countImportJobs(): Observable<any> { 
+  countImportJobs(): Observable<any> {
     return this.http.get<any>(this.rootUrl + '/jobs/count');
   }
 

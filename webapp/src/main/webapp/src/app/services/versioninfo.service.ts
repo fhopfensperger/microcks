@@ -23,7 +23,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class VersionInfoService {
 
-  private rootUrl: string = '/api';
+  private rootUrl: string = '/mock-server/microcks/api';
 
   constructor(private http: HttpClient) { }
 

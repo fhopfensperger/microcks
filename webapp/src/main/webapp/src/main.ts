@@ -8,8 +8,8 @@ if (environment.production) {
   enableProdMode();
 }
 
-var keycloak = window["Keycloak"](location.origin + '/api/keycloak/config');
-var loginOptions = {onLoad: 'login-required'};
+var keycloak = window["Keycloak"](location.origin + '/mock-server/microcks/api/keycloak/config');
+var loginOptions = { onLoad: 'login-required' };
 console.log("location.origin: " + location.origin);
 if (location.origin.indexOf("/localhost:") != -1) {
   console.log("[Microcks launch] Running locally so disabling Keycloak checkLogin Iframe to respect modern browser restrictions");
@@ -17,8 +17,8 @@ if (location.origin.indexOf("/localhost:") != -1) {
 }
 keycloak.init(loginOptions).then(function (authenticated) {
   if (authenticated) {
-      window['keycloak'] = keycloak;
-      platformBrowserDynamic().bootstrapModule(AppModule)
+    window['keycloak'] = keycloak;
+    platformBrowserDynamic().bootstrapModule(AppModule)
       .catch(err => console.log(err));
   }
 }).catch(function () {

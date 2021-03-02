@@ -36,9 +36,9 @@ export class SnapshotsTabComponent implements OnInit {
   servicesCount: number;
 
   selectedServices: any = { ids: {} };
-  uploader: FileUploader = new FileUploader({url: '/api/import', itemAlias: 'file'});
+  uploader: FileUploader = new FileUploader({ url: '/mock-server/microcks/api/import', itemAlias: 'file' });
 
-  constructor(private servicesSvc: ServicesService, private notificationService: NotificationService) {}
+  constructor(private servicesSvc: ServicesService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.getAllServices();
@@ -50,7 +50,7 @@ export class SnapshotsTabComponent implements OnInit {
     };
   }
 
-  getAllServices():void {
+  getAllServices(): void {
     this.servicesSvc.getServices(1, 1000).subscribe(
       results => {
         this.halfServices = results.slice(0, (results.length / 2) + 1);
@@ -61,8 +61,8 @@ export class SnapshotsTabComponent implements OnInit {
   }
 
   public createExport(): void {
-    var downloadPath = '/api/export?';
-    Object.keys(this.selectedServices.ids).forEach(function(element, index, array) {
+    var downloadPath = '/mock-server/microcks/api/export?';
+    Object.keys(this.selectedServices.ids).forEach(function (element, index, array) {
       downloadPath += '&serviceIds=' + element;
     });
     window.open(downloadPath, '_blank', '');

@@ -26,7 +26,7 @@ import { RequestResponsePair, UnidirectionalEvent } from '../models/service.mode
 @Injectable({ providedIn: 'root' })
 export class TestsService {
 
-  private rootUrl: string = '/api';
+  private rootUrl: string = '/mock-server/microcks/api';
 
   constructor(private http: HttpClient) { }
 
@@ -44,7 +44,7 @@ export class TestsService {
   }
 
   public create(testRequest: TestRequest): Observable<TestResult> {
-    return this.http.post<TestResult>(this.rootUrl +  '/tests', testRequest);
+    return this.http.post<TestResult>(this.rootUrl + '/tests', testRequest);
   }
 
   public getMessages(test: TestResult, operation: string): Observable<RequestResponsePair> {
